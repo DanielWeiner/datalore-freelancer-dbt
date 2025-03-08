@@ -1,0 +1,111 @@
+version: 2
+
+models:
+  - name: project
+    description: "A Freelancer project"
+    config:
+      contract: {enforced: true}
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - id
+            - execution_time
+    constraints:
+      - type: primary_key
+        columns: [id, execution_time]
+        warn_unenforced: false
+    columns:
+      - name: id
+        data_type: int
+        description: The id of the project
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: title
+        data_type: string
+        description: "The title of the project"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: description
+        data_type: string
+        description: "The description of the project"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: skills
+        data_type: array<string>
+        description: "An array of skills associated with the project"
+      - name: currency
+        data_type: string
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+        description: "The currency code for the project's bids"
+      - name: currency_exchange_rate
+        data_type: float
+        description: "The conversion factor of the currency to USD"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: status
+        data_type: string
+        description: "The status of the project"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: sub_status
+        data_type: string
+        description: "Additional details about the project's status"
+      - name: type
+        data_type: string
+        description: "How the project is compensated - fixed or hourly"
+        data_tests:
+            - not_null
+        constraints:
+          - type: not_null
+      - name: url
+        data_type: string
+        description: "Freelancer URL for the project"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: frontend_status
+        data_type: string
+        description: "Public-facing status of the project"
+      - name: time_submitted
+        data_type: timestamp
+        description: "When the project was submitted to Freelancer"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null
+      - name: bid_count
+        data_type: int
+        description: "How many bids the project received"
+      - name: bid_avg
+        data_type: float
+        description: "Average bid amount"
+      - name: budget_min
+        data_type: float
+        description: "Minimum amount the submitter will pay"
+      - name: budget_max
+        data_type: float
+        description: "Maximum amount the submitter will pay"
+      - name: freelancer_job_ids
+        data_type: array<int>
+        description: "Freelancer job IDs associated with the project"
+      - name: execution_time
+        data_type: timestamp
+        description: "When the data was pulled from Freelancer"
+        data_tests:
+          - not_null
+        constraints:
+          - type: not_null

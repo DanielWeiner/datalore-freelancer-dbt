@@ -1,0 +1,1 @@
+select * from {{ source('freelancer_projects', 'projects') }}
