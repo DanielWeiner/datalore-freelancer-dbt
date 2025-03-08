@@ -1,0 +1,6 @@
+version: 2
+
+sources:
+  - name: freelancer_projects
+    tables:
+      - name: projects
